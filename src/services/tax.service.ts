@@ -22,8 +22,10 @@ export class TaxPositionService {
     }
 
     const transactions = await this.transactionRepo.find({
-      relations: ['items'],
-    });
+			where: { date: LessThanOrEqual(queryDate) },
+			relations: ['items'],
+		});
+
 
     let sumSalesTax = 0;
     let sumTaxPayments = 0;
