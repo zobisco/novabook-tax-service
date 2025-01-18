@@ -44,7 +44,7 @@ paths:
           in: query
           description: Date and time in ISO 8601 format (e.g., 2024-02-22T17:29:39Z)
           schema:
-            example: 2024-02-22T17:29:39Z
+            example: 2024-02-22T18:31:00Z
             type: string
       responses:
         "200":
