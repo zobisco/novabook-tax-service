@@ -23,6 +23,7 @@ Table SaleAmendment {
     itemId      TEXT UNIQUE
     cost        INTEGER UNIQUE
     taxRate     REAL UNIQUE
+    taxPosition INTEGER
 }
 
 // Relationships
