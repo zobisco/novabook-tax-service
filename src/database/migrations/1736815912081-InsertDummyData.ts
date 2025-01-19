@@ -6,7 +6,7 @@ export class CreateAndSeedTables1736815912081 implements MigrationInterface {
       CREATE TABLE "Transaction" (
         id TEXT PRIMARY KEY,
         "eventType" TEXT NOT NULL,
-        "date" TEXT NOT NULL, -- ISO 8601 format
+        "date" TEXT NOT NULL,
         "invoiceId" TEXT,
         "amount" INTEGER
       );
@@ -26,7 +26,7 @@ export class CreateAndSeedTables1736815912081 implements MigrationInterface {
 		await queryRunner.query(`
       CREATE TABLE "SaleAmendment" (
         id TEXT PRIMARY KEY,
-        "date" TEXT NOT NULL, -- ISO 8601 format
+        "date" TEXT NOT NULL,
         "invoiceId" TEXT NOT NULL,
         "itemId" TEXT NOT NULL,
         "cost" INTEGER NOT NULL,
