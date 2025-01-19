@@ -1,35 +1,28 @@
-// Paste this into https://dbdiagram.io/d to view diagram structure.
-
-// Enum definition
-Enum Event_Type {
-  "SALES"
-  "TAX_PAYMENT"
-}
+// https://dbdiagram.io/d/Novabook-database-diagram-678ad53d6b7fa355c341a414
 
 Table Transaction {
-  id        TEXT PK
-  eventType Event_Type
-  date      TEXT UNIQUE
-  invoiceId TEXT
-  amount    INTEGER
+    id        TEXT PK
+    eventType TEXT UNIQUE
+    date      TEXT UNIQUE
+    invoiceId TEXT
+    amount    INTEGER
 }
 
 Table SaleItem {
-  id            TEXT PK
-  transactionId TEXT
-  itemId        TEXT UNIQUE
-  cost          INTEGER UNIQUE
-  taxRate       REAL UNIQUE
+    id            TEXT PK
+    transactionId TEXT
+    itemId        TEXT UNIQUE
+    cost          INTEGER UNIQUE
+    taxRate       REAL UNIQUE
 }
 
 Table SaleAmendment {
-  id          TEXT PK
-  date        TEXT UNIQUE
-  invoiceId   TEXT UNIQUE
-  itemId      TEXT UNIQUE
-  cost        INTEGER UNIQUE
-  taxRate     REAL UNIQUE
-  taxPosition INTEGER
+    id          TEXT PK
+    date        TEXT UNIQUE
+    invoiceId   TEXT UNIQUE
+    itemId      TEXT UNIQUE
+    cost        INTEGER UNIQUE
+    taxRate     REAL UNIQUE
 }
 
 // Relationships

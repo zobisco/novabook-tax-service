@@ -31,7 +31,7 @@ export class CreateAndSeedTables1736815912081 implements MigrationInterface {
         "itemId" TEXT NOT NULL,
         "cost" INTEGER NOT NULL,
         "taxRate" REAL NOT NULL,
-        "taxPosition" REAL
+        "taxPosition" INTEGER
       );
     `);
 
