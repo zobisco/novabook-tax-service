@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  HttpException,
+  HttpStatus,
+  HttpCode,
+} from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { TransactionService } from '../services/transaction.service';
 import { TransactionDto } from '../dtos/transaction.dto';
@@ -21,7 +29,8 @@ export class TransactionController {
     description: 'Invalid transaction data.',
   })
   @ApiBody({
-    description: 'Request body for creating a transaction (SALES or TAX_PAYMENT)',
+    description:
+      'Request body for creating a transaction (SALES or TAX_PAYMENT)',
     schema: {
       oneOf: [
         {
@@ -48,13 +57,16 @@ export class TransactionController {
       ],
     },
   })
-  async createTransaction(@Body() transaction: TransactionDto): Promise<TransactionEntity> {
+  @HttpCode(202)
+  async createTransaction(
+    @Body() transaction: TransactionDto
+  ): Promise<TransactionEntity> {
     try {
       return await this.transactionService.createTransaction(transaction);
     } catch (error) {
       throw new HttpException(
         `Error creating transaction: ${error}`,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.BAD_REQUEST
       );
     }
   }
