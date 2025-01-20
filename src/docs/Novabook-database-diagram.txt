@@ -16,7 +16,7 @@ Table SaleItem {
     taxRate       REAL UNIQUE
 }
 
-Table SaleAmendment {
+Table AmendSale {
     id          TEXT PK
     date        TEXT UNIQUE
     invoiceId   TEXT UNIQUE
