@@ -1,7 +1,4 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { SaleItemEntity } from './entities/saleItem.entity';
-import { SaleAmendmentEntity } from './entities/saleAmendment.entity';
-import { TransactionEntity } from './entities/transaction.entity';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';;
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'sqlite',
