@@ -1,12 +1,19 @@
-import { Controller, Patch, Body, HttpException, HttpStatus, HttpCode } from '@nestjs/common';
+import {
+  Controller,
+  Patch,
+  Body,
+  HttpException,
+  HttpStatus,
+  HttpCode,
+} from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { SaleAmendmentService } from '../services/saleAmendment.service';
+import { AmendSaleService } from '../services/amendSale.service';
 import { SaleItemDto } from '../dtos/saleItem.dto';
 
 @ApiTags('sale')
 @Controller('sale')
 export class AmendSaleController {
-  constructor(private readonly saleAmendmentService: SaleAmendmentService) {}
+  constructor(private readonly amendSaleService: AmendSaleService) {}
 
   @Patch()
   @ApiOperation({ summary: 'Amend a sales item' })
@@ -24,8 +31,14 @@ export class AmendSaleController {
       type: 'object',
       properties: {
         date: { type: 'string', example: '2024-02-22T17:29:39Z' },
-        invoiceId: { type: 'string', example: '3419027d-960f-4e8f-b8b7-f7b2b4791824' },
-        itemId: { type: 'string', example: '02db47b6-fe68-4005-a827-24c6e962f3df' },
+        invoiceId: {
+          type: 'string',
+          example: '3419027d-960f-4e8f-b8b7-f7b2b4791824',
+        },
+        itemId: {
+          type: 'string',
+          example: '02db47b6-fe68-4005-a827-24c6e962f3df',
+        },
         cost: { type: 'number', example: 798 },
         taxRate: { type: 'number', example: 0.15 },
       },
@@ -34,11 +47,11 @@ export class AmendSaleController {
   @HttpCode(202)
   async amendSale(@Body() amendment: SaleItemDto): Promise<void> {
     try {
-      await this.saleAmendmentService.createAmendment(amendment);
+      await this.amendSaleService.createAmendment(amendment);
     } catch (error) {
       throw new HttpException(
         `Error processing amendment: ${error}`,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.BAD_REQUEST
       );
     }
   }

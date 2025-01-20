@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Repository } from 'typeorm';
 import { SaleItemEntity } from '../../database/entities/saleItem.entity';
-import { SaleAmendmentService } from './../saleAmendment.service';
+import { AmendSaleService } from '../amendSale.service';
 import { SaleItemDto } from '../../dtos/saleItem.dto';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
@@ -11,14 +11,14 @@ const mockRepository = {
   save: jest.fn(),
 };
 
-describe('SaleAmendmentService', () => {
-  let service: SaleAmendmentService;
+describe('AmendSaleService', () => {
+  let service: AmendSaleService;
   let repository: Repository<SaleItemEntity>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        SaleAmendmentService,
+        AmendSaleService,
         {
           provide: getRepositoryToken(SaleItemEntity),
           useValue: mockRepository,
@@ -26,8 +26,10 @@ describe('SaleAmendmentService', () => {
       ],
     }).compile();
 
-    service = module.get<SaleAmendmentService>(SaleAmendmentService);
-    repository = module.get<Repository<SaleItemEntity>>(getRepositoryToken(SaleItemEntity));
+    service = module.get<AmendSaleService>(AmendSaleService);
+    repository = module.get<Repository<SaleItemEntity>>(
+      getRepositoryToken(SaleItemEntity)
+    );
   });
 
   afterEach(() => {
@@ -59,12 +61,17 @@ describe('SaleAmendmentService', () => {
       };
 
       jest.spyOn(repository, 'findOne').mockResolvedValue(existingItem);
-      jest.spyOn(repository, 'save').mockResolvedValue({ ...existingItem, ...saleAmendmentDto });
+      jest
+        .spyOn(repository, 'save')
+        .mockResolvedValue({ ...existingItem, ...saleAmendmentDto });
 
       const result = await service.createAmendment(saleAmendmentDto);
 
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { transactionId: saleAmendmentDto.transactionId, itemId: saleAmendmentDto.itemId },
+        where: {
+          transactionId: saleAmendmentDto.transactionId,
+          itemId: saleAmendmentDto.itemId,
+        },
       });
       expect(repository.save).toHaveBeenCalledWith({
         ...existingItem,
@@ -99,7 +106,10 @@ describe('SaleAmendmentService', () => {
       const result = await service.createAmendment(saleAmendmentDto);
 
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { transactionId: saleAmendmentDto.transactionId, itemId: saleAmendmentDto.itemId },
+        where: {
+          transactionId: saleAmendmentDto.transactionId,
+          itemId: saleAmendmentDto.itemId,
+        },
       });
       expect(repository.create).toHaveBeenCalledWith(saleAmendmentDto);
       expect(repository.save).toHaveBeenCalledWith({

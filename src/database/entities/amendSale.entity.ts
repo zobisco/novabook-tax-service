@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity('SaleAmendment')
-export class SaleAmendmentEntity {
+@Entity('AmendSale')
+export class AmendSaleEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -29,7 +29,7 @@ export class SaleAmendmentEntity {
     invoiceId: string,
     itemId: string,
     cost: number,
-    taxRate: number,
+    taxRate: number
   ) {
     this.id = id;
     this.date = date;
