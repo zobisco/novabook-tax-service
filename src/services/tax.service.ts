@@ -48,7 +48,7 @@ export class TaxPositionService {
 			}
 		}
 
-		const taxPosition = sumSalesTax - sumTaxPayments;
+		const taxPosition = Math.round(sumSalesTax - sumTaxPayments);
 
 		return {
 			date: queryDate.toISOString(),
