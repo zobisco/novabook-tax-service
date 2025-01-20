@@ -59,10 +59,10 @@ export class TransactionController {
   })
   @HttpCode(202)
   async createTransaction(
-    @Body() transaction: TransactionDto
+    @Body() transactionDto: TransactionDto
   ): Promise<TransactionEntity> {
     try {
-      return await this.transactionService.createTransaction(transaction);
+      return await this.transactionService.createTransaction(transactionDto);
     } catch (error) {
       throw new HttpException(
         `Error creating transaction: ${error}`,

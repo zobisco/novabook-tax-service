@@ -11,19 +11,19 @@ export class AmendSaleService {
     private readonly amendSaleRepo: Repository<SaleItemEntity>
   ) {}
 
-  async createAmendment(amendSale: SaleItemDto): Promise<SaleItemEntity> {
+  async createAmendment(amendSaleDto: SaleItemDto): Promise<SaleItemEntity> {
     let existingSaleItem = await this.amendSaleRepo.findOne({
       where: {
-        transactionId: amendSale.transactionId,
-        itemId: amendSale.itemId,
+        transactionId: amendSaleDto.transactionId,
+        itemId: amendSaleDto.itemId,
       },
     });
 
     if (existingSaleItem) {
-      existingSaleItem.cost = amendSale.cost ?? existingSaleItem.cost;
-      existingSaleItem.taxRate = amendSale.taxRate ?? existingSaleItem.taxRate;
+      existingSaleItem.cost = amendSaleDto.cost ?? existingSaleItem.cost;
+      existingSaleItem.taxRate = amendSaleDto.taxRate ?? existingSaleItem.taxRate;
     } else {
-      existingSaleItem = this.amendSaleRepo.create(amendSale);
+      existingSaleItem = this.amendSaleRepo.create(amendSaleDto);
     }
 
     return this.amendSaleRepo.save(existingSaleItem);

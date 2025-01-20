@@ -12,10 +12,10 @@ export class TransactionService {
     private readonly transactionRepo: Repository<TransactionEntity>,
   ) {}
 
-  async createTransaction(transaction: TransactionDto): Promise<TransactionEntity> {
+  async createTransaction(transactionDto: TransactionDto): Promise<TransactionEntity> {
     const entity = this.transactionRepo.create({
-      ...transaction,
-      eventType: transaction.eventType as TransactionEventType,
+      ...transactionDto,
+      eventType: transactionDto.eventType as TransactionEventType,
     });
 
     return this.transactionRepo.save(entity);
