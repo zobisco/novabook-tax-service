@@ -163,7 +163,3 @@ Before you begin, ensure you have the following installed:
 ---
 
 For further details, refer to the source code and Swagger documentation.
-
-npm install && npm run start:dev && npm run migration:run
-
-//EOF
