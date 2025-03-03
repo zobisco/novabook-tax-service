@@ -31,7 +31,6 @@ export class CreateAndSeedTables1736815912081 implements MigrationInterface {
         "itemId" TEXT NOT NULL,
         "cost" INTEGER NOT NULL,
         "taxRate" REAL NOT NULL,
-        "taxPosition" INTEGER
       );
     `);
 
@@ -60,9 +59,9 @@ export class CreateAndSeedTables1736815912081 implements MigrationInterface {
     `);
 
     await queryRunner.query(`
-      INSERT INTO "AmendSale" ("id", "date", "invoiceId", "itemId", "cost", "taxRate", "taxPosition")
+      INSERT INTO "AmendSale" ("id", "date", "invoiceId", "itemId", "cost", "taxRate")
       VALUES
-        ('1', '2024-02-22T17:29:39Z', 'invoice2', 'item3', 600, 0.15, 90);
+        ('1', '2024-02-22T17:29:39Z', 'invoice2', 'item3', 600, 0.15);
     `);
   }
 
